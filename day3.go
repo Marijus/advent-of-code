@@ -7,7 +7,7 @@ import (
 )
 
 func dayThree() {
-	inputString := getInput("day3_input.txt")
+	inputString := getInput("day3_input_test.txt")
 	var items []string
 	for _, item := range strings.Split(inputString, "\n") {
 		items = append(items, item)
@@ -37,11 +37,13 @@ func dayThree() {
 		}
 	}
 
+	fmt.Println(mostCommonResult)
 	mostCommonResultDecimal, err := strconv.ParseInt(mostCommonResult, 2, 64)
 	if err != nil {
 		panic(err)
 	}
 
+	fmt.Println(leastCommonResult)
 	leastCommonResultDecimal, err := strconv.ParseInt(leastCommonResult, 2, 64)
 	if err != nil {
 		panic(err)
