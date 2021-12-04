@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/Marijus/advent-of-code/common"
 	"strconv"
 	"strings"
 )
@@ -121,7 +122,7 @@ func (b *Board) print() {
 	fmt.Println()
 }
 
-func dayFour() {
+func firstPart() {
 	luckyNumbers, boards := readBoards("day4_input_test.txt")
 
 	for i := 0; i < len(luckyNumbers); i++ {
@@ -141,7 +142,7 @@ func dayFour() {
 	}
 }
 
-func dayFourPartTwo() {
+func secondPart() {
 	luckyNumbers, boards := readBoards("day4_input.txt")
 
 	for i := 0; i < len(luckyNumbers); i++ {
@@ -175,7 +176,7 @@ func dayFourPartTwo() {
 }
 
 func readBoards(fileName string) (luckyNumbers []int, boards []*Board) {
-	inputString := getInput(fileName)
+	inputString := common.GetInput(fileName)
 	lines := strings.Split(inputString, "\n")
 
 	//var luckyNumbers []int

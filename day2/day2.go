@@ -2,12 +2,13 @@ package main
 
 import (
 	"fmt"
+	"github.com/Marijus/advent-of-code/common"
 	"strconv"
 	"strings"
 )
 
 func dayTwo() {
-	inputString := getInput("day2_input.txt")
+	inputString := common.GetInput("day2_input.txt")
 	instructions := strings.Split(inputString, "\n")
 
 	horizontal := 0
@@ -36,7 +37,7 @@ func dayTwo() {
 }
 
 func dayTwoPartTwo() {
-	inputString := getInput("day2_input.txt")
+	inputString := common.GetInput("day2_input.txt")
 	instructions := strings.Split(inputString, "\n")
 
 	horizontal := 0
