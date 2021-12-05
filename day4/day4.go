@@ -143,7 +143,7 @@ func firstPart() {
 }
 
 func secondPart() {
-	luckyNumbers, boards := readBoards("day4_input.txt")
+	luckyNumbers, boards := readBoards("day4_input_test.txt")
 
 	for i := 0; i < len(luckyNumbers); i++ {
 		luckyNumber := luckyNumbers[i]
