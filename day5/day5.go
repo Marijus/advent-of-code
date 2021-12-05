@@ -8,38 +8,17 @@ import (
 )
 
 type CoordinatesStorage struct {
-	items []*Coordinate
+	items [][]int
 }
 
-type Coordinate struct {
-	x, y, count int
-}
+func NewCoordinateStorage() *CoordinatesStorage {
+	items := make([][]int, 1024)
 
-func (storage *CoordinatesStorage) getItem(x, y int) *Coordinate {
-	for _, item := range storage.items {
-		if x == item.x && y == item.y {
-			return item
-		}
+	for i := 0; i < 1024; i++ {
+		items[i] = make([]int, 1024)
 	}
 
-	return nil
-}
-
-func (storage *CoordinatesStorage) printMatrix() {
-	for i := 0; i <= 9; i++ {
-		line := ""
-		for j := 0; j <= 9; j++ {
-			item := storage.getItem(i, j)
-
-			if item != nil {
-				line += fmt.Sprintf("%d ", item.count)
-			} else {
-				line += ". "
-			}
-		}
-
-		fmt.Println(line)
-	}
+	return &CoordinatesStorage{items: items}
 }
 
 func (storage *CoordinatesStorage) addCoordinates(x1, y1, x2, y2 int, countDiagonally bool) {
@@ -95,26 +74,17 @@ func (storage *CoordinatesStorage) addCoordinates(x1, y1, x2, y2 int, countDiago
 }
 
 func (storage *CoordinatesStorage) addSingleCoordinate(x, y int) {
-	for _, item := range storage.items {
-		if item.x == x && item.y == y {
-			item.count += 1
-			return
-		}
-	}
-
-	storage.items = append(storage.items, &Coordinate{
-		x:     x,
-		y:     y,
-		count: 1,
-	})
+	storage.items[x][y] += 1
 }
 
 func (storage *CoordinatesStorage) getOverlappingPoints() (count int) {
 	count = 0
 
-	for _, item := range storage.items {
-		if item.count > 1 {
-			count++
+	for i := 0; i < len(storage.items); i++ {
+		for j := 0; j < len(storage.items[i]); j++ {
+			if storage.items[i][j] > 1 {
+				count++
+			}
 		}
 	}
 
@@ -122,9 +92,9 @@ func (storage *CoordinatesStorage) getOverlappingPoints() (count int) {
 }
 
 func dayFive(countDiagonally bool) {
-	inputString := common.GetInput("day5_input_test.txt")
+	inputString := common.GetInput("day5_input.txt")
 
-	storage := CoordinatesStorage{}
+	storage := NewCoordinateStorage()
 
 	for _, line := range strings.Split(inputString, "\n") {
 		items := strings.Split(line, " -> ")
@@ -139,7 +109,6 @@ func dayFive(countDiagonally bool) {
 	}
 
 	result := storage.getOverlappingPoints()
-	//storage.printMatrix()
 	fmt.Println("result: ", result)
 }
 
